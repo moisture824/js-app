@@ -1,21 +1,7 @@
-//The push below allows the set to add multiple objects.
+//{used for arrays} while [used for objects]
 
-let pokemonList =[];
-
-pokemonList.push ({
-    name: 'Pikachu',
-    height: 10,
-    type: 'lightening'
-})
-
-pokemonList.push ({
-    name: 'Charmander',
-    height: 12,
-    type: 'fire'
-})
-
-pokemonList.push ({
-    name: 'Blastoise',
-    height: 14,
-    type: 'water'
-});
+let pokemonList =[
+    {name: "Pikachu", height: 10, type: "lightening"},
+    {name: "Charmander", height: 12, type: "fire"},
+    {name: "Blastoise", height: 14, type: "water"},
+];
