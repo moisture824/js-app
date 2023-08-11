@@ -1,4 +1,4 @@
-//{sed for arrays} while [used for objects]
+//{used for arrays} while [used for objects]
 
 let pokemonRepository = (function () {
     let pokemonList =[
@@ -12,8 +12,8 @@ let pokemonRepository = (function () {
         return pokemonList;
     }
 // Define a function named add that takes a single argument, pokemon, and adds it to the pokemonList array
-    function add(pokemonitem) {
-        pokemonList.push(pokemonitem);
+    function add(Snorlax) {
+        pokemonList.push(Snorlax);
     }
 // Return an object with two properties, getAll and add, which are assigned the values of the getAll and add functions, respectively
     return {
