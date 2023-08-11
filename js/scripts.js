@@ -1,11 +1,27 @@
-//{used for arrays} while [used for objects]
+//{sed for arrays} while [used for objects]
 
-(function () {
+let pokemonRepository = (function () {
     let pokemonList =[
         {name: "Pikachu", height: 10, type: "lightening"},
         {name: "Charmander", height: 12, type: "fire"},
         {name: "Blastoise", height: 14, type: "water"},
     ];
+
+// Define a function named getAll that returns the pokemonList array
+    function getAll() {
+        return pokemonList;
+    }
+// Define a function named add that takes a single argument, pokemon, and adds it to the pokemonList array
+    function add(pokemonitem) {
+        pokemonList.push(pokemonitem);
+    }
+// Return an object with two properties, getAll and add, which are assigned the values of the getAll and add functions, respectively
+    return {
+        getAll: getAll,
+        add: add
+    };
+
+})();
 
     // Use the forEach() function to iterate over each element in the pokemonList array
     pokemonList.forEach(function(pokemon) {
@@ -18,4 +34,3 @@
             document.write(pokemon.name + " (height: " + pokemon.height + ")<br><br>");
         }
     });
-})();
