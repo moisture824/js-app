@@ -21,16 +21,24 @@ setting the button text to the Pokemon's name, and appending the button to the l
         let pokemonList = document.querySelector(".pokemon-list");
         let listPokemon = document.createElement("li");
         let button = document.createElement("button");
+        button.addEventListener("click", function (event) {
+            console.log(event);
+        });
         button.innerText = pokemon.name;
         button.classList.add("button-class");
         listPokemon.appendChild(button);
-        pokemonList.appendChild(listpokemon);
+        pokemonList.appendChild(listPokemon);
+    }
+
+    function showDetails(pokemon) {
+        console.log(pokemon);
     }
 // Return an object with three properties, getAll, add, & addListItem.
     return {
         getAll: getAll,
         add: add,
-        addListItem: addListItem
+        addListItem: addListItem,
+        showDetails: showDetails
     };
 
 })();
