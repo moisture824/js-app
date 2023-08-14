@@ -15,8 +15,9 @@ let pokemonRepository = (function () {
     function add(Snorlax) {
         pokemonList.push(Snorlax);
     }
-/* This function adds a new Pokemon to an existing list by creating a new list item and button, 
-setting the button text to the Pokemon's name, and appending the button to the list item and the list item to the list.*/
+/* The addListItem function takes a pokemon object as a parameter & adds it to a list of Pokemon. It creates a new list item
+with a button that displays the Pokemon name & logs the event when clicked. The button is added to the list item, which is then
+appended to the Pokemon list.*/
     function addListItem(pokemon){
         let pokemonList = document.querySelector(".pokemon-list");
         let listPokemon = document.createElement("li");
@@ -33,7 +34,7 @@ setting the button text to the Pokemon's name, and appending the button to the l
     function showDetails(pokemon) {
         console.log(pokemon);
     }
-// Return an object with three properties, getAll, add, & addListItem.
+// Return an object with four properties, getAll, add, addListItem, & showDetails.
     return {
         getAll: getAll,
         add: add,
