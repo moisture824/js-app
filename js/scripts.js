@@ -1,11 +1,7 @@
 //{used for arrays} while [used for objects]
 
 let pokemonRepository = (function () {
-    let pokemonList =[
-        {name: "Pikachu", height: 10, type: "lightening"},
-        {name: "Charmander", height: 12, type: "fire"},
-        {name: "Blastoise", height: 14, type: "water"},
-    ];
+    let pokemonList =[];
 
 // Define a function named getAll that returns the pokemonList array.
     function getAll() {
