@@ -3,7 +3,7 @@
 // Define a pokemon repository object with an IIFE & initialize an empty pokemon list & set the API URL.
     let pokemonRepository = (function () {
         let pokemonList =[];
-        let apiUrl = 'https://poke.api.co/api/v2/pokemon/?limit=150';
+        let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
     function add(pokemon) {
         if (
@@ -92,4 +92,11 @@ to the item & returns a promise.*/
 to add a list item to the DOM.*/
 pokemonRepository.getAll().forEach(function(pokemon) {
     pokemonRepository.addListItem(pokemon);
+});
+
+// Load the list of pokemons from the API, then get all pokemons and add a list item for each pokemon to the DOM
+pokemonRepository.loadList().then(function() {
+    pokemonRepository.getAll().forEach(function(pokemon) {
+        pokemonRepository.addListItem(pokemon);
+    });
 });
