@@ -64,6 +64,7 @@ let pokemonRepository = (function() {
         hideModal();
         resolve();
     });
+    
     // This can be used to reject from other functions
       dialogPromiseReject = reject;
     });
