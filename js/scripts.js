@@ -20,6 +20,11 @@
         return pokemonList;
     }
 
+//Added conditional statement to ensure that pokemonList is properly defined.
+    if (pokemonList) {
+        pokemonList.appendChild(listPokemon);
+    }
+
 /* Defines a function that creates a list item with a button for a given pokemon & appends it
 to a list of pokemons in the DOM. The button event listener logs the event to the console & calls
 the showDetails function for the pokemon when clicked.*/
@@ -151,6 +156,14 @@ pokemonRepository.loadList().then(function() {
 //Defines the emailInput & passwordInput as variables
     let emailInput = document.querySelector('#emailInput');
     let passwordInput = document.querySelector('#passwordInput');
+
+//Added conditional statement above the event listener to check if the variables are properly defined
+    if (emailInput) {
+        emailInput.addEventListener('input', validateEmail);
+    }
+    if (passwordInput) {
+        passwordInput.addEventListener('input', validatePassword);
+    }
 
 // Validate the fields once the user starts typing in them
 emailInput.addEventListener('input', validateEmail);
