@@ -148,6 +148,9 @@ pokemonRepository.loadList().then(function() {
     showModal('Modal title', 'This is the modal content!');
   });  
 
+//Defines the emailInput & passwordInput as variables
+    let emailInput = document.querySelector('#emailInput');
+    let passwordInput = document.querySelector('#passwordInput');
 
 // Validate the fields once the user starts typing in them
 emailInput.addEventListener('input', validateEmail);
