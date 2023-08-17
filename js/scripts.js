@@ -97,4 +97,15 @@ let pokemonRepository = (function() {
     showModal ('Modal title', 'This is the modal content');
   });
 
+  let container = document.querySelector('#image-container');
+
+  // Create an <img> element
+  let myImage = document.createElement('img');
+
+  // setting `src` property to set the actual element's `src` attribute
+  // this also works on <img> elements selected by querySelector() method, it is not specific for <img> elements created with createElement() methods
+  myImage.src = 'https://i.pinimg.com/originals/53/db/fd/53dbfd304766b5858ee6e139646713c7.png';
+
+  container.appendChild(myImage);
+
   })();
