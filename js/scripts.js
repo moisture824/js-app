@@ -20,14 +20,10 @@
         return pokemonList;
     }
 
-//Added conditional statement to ensure that pokemonList is properly defined.
-    if (pokemonList) {
-        pokemonList.appendChild(listPokemon);
-    }
-
 /* Defines a function that creates a list item with a button for a given pokemon & appends it
 to a list of pokemons in the DOM. The button event listener logs the event to the console & calls
 the showDetails function for the pokemon when clicked.*/
+//Added conditional statement to ensure that pokemonList is properly defined.
     function addListItem(pokemon){
         let pokemonList = document.querySelector(".pokemon-list");
         let listPokemon = document.createElement("li");
@@ -38,7 +34,9 @@ the showDetails function for the pokemon when clicked.*/
         button.innerText = pokemon.name;
         button.classList.add("button-class");
         listPokemon.appendChild(button);
-        pokemonList.appendChild(listPokemon);
+        if (pokemonList) {
+            pokemonList.appendChild(listPokemon);
+        }
         button.addEventListener("click", function(event) {
             showDetails(pokemon);
         });
@@ -64,7 +62,7 @@ If there's an error during fetch, it is caught & logged to the console.*/
     }
 /* same as previous function + processes the JSON response to add image URL, height, & types properties
 to the item & returns a promise.*/
-    function loadDetails(item) {
+    (function loadDetails(item) {
         let url = item.detailsUrl;
         return fetch(url).then(function (response) {
             return response.json();
@@ -76,13 +74,13 @@ to the item & returns a promise.*/
         }).catch(function (e) {
             console.error(e);
         });
-    }
+    })();
 
-    function showDetails(pokemon) {
+    (function showDetails(pokemon) {
         loadDetails(pokemon).then(function () {
           console.log(pokemon);
         });
-      }
+      })();
 // Return an object with its corresponding properties.
     return {
         getAll: getAll,
@@ -93,7 +91,7 @@ to the item & returns a promise.*/
         showDetails: showDetails
     };
 
-})();
+    });
 
 /* Gets an array of all pokemon, iterates over the array using forEach & calls addListItem for each pokemon
 to add a list item to the DOM.*/
