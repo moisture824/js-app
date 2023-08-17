@@ -12,13 +12,14 @@
             pokemonList.push(pokemon);
         } else {
             console.log("pokemon is not correct");
-            }
+        }
     }
 
 // Define a function named getAll that returns the pokemonList array.
     function getAll() {
         return pokemonList;
     }
+
 /* Defines a function that creates a list item with a button for a given pokemon & appends it
 to a list of pokemons in the DOM. The button event listener logs the event to the console & calls
 the showDetails function for the pokemon when clicked.*/
@@ -37,6 +38,7 @@ the showDetails function for the pokemon when clicked.*/
             showDetails(pokemon);
         });
     }
+    
 /* loadList fetches data from an API, processes the JSON response to create pokemon objects
 with name & details URL properties & adds them to the pokemon list using the add function.
 If there's an error during fetch, it is caught & logged to the console.*/
@@ -101,6 +103,57 @@ pokemonRepository.loadList().then(function() {
     });
 });
 
+// Show a modal with a given title and text when a button is clicked.
+(function showModal() {
+    let modalContainer = document.querySelector('#modal-container');
+    modalContainer.classList.add('is-visible');
+  })();
+  
+  document.querySelector('#show-modal').addEventListener('click', () => {
+    showModal();
+  });
+
+// showModal function will be able to accept both the title & text as parameters (i.e., anytime showModal is declared, a title & text argument must be assigned.
+(function showModal(title, text) {
+    let modalContainer = document.querySelector('#modal-container');
+  
+    // Clear all existing modal content
+    modalContainer.innerHTML = '';
+  
+    let modal = document.createElement('div');
+    modal.classList.add('modal');
+  
+    // Add the new modal content
+    let closeButtonElement = document.createElement('button');
+    closeButtonElement.classList.add('modal-close');
+    closeButtonElement.innerText = 'Close';
+  
+    let titleElement = document.createElement('h1');
+    titleElement.innerText = title;
+  
+    let contentElement = document.createElement('p');
+    contentElement.innerText = text;
+  
+    modal.appendChild(closeButtonElement);
+    modal.appendChild(titleElement);
+    modal.appendChild(contentElement);
+    modalContainer.appendChild(modal);
+  
+  
+  
+    modalContainer.classList.add('is-visible');
+  })();
+  
+  document.querySelector('#show-modal').addEventListener('click', () => {
+    showModal('Modal title', 'This is the modal content!');
+  });  
+
+
+// Validate the fields once the user starts typing in them
+emailInput.addEventListener('input', validateEmail);
+passwordInput.addEventListener('input', validatePassword);
+
+
 // To validate email
 (function validateEmail() {
     let value = emailInput.value;
@@ -135,25 +188,158 @@ pokemonRepository.loadList().then(function() {
   })();
 
   // These are error message templates
-(function validateEmail() {
-    let value = emailInput.value;
-  
-    if (!value) {
-      showErrorMessage(emailInput, 'Email is a required field.');
-      return false;
-    }
-  
-    if (value.indexOf('@') === -1) {
-      showErrorMessage(emailInput, 'You must enter a valid email address.');
-      return false;
-    }
-  
-    if (value.indexOf('.') === -1) {
-      showErrorMessage(emailInput, 'You must enter a valid email address.');
-      return false;
-    }
+    (function validateEmail() {
+        let value = emailInput.value;
+    
+        if (!value) {
+        showErrorMessage(emailInput, 'Email is a required field.');
+        return false;
+        }
+    
+        if (value.indexOf('@') === -1) {
+        showErrorMessage(emailInput, 'You must enter a valid email address.');
+        return false;
+        }
+    
+        if (value.indexOf('.') === -1) {
+        showErrorMessage(emailInput, 'You must enter a valid email address.');
+        return false;
+        }
   
   
     showErrorMessage(emailInput, null);
     return true;
 })();
+
+// This is a password error message
+function validatePassword() {
+    let value = passwordInput.value;
+  
+    if (!value) {
+      showErrorMessage(passwordInput, 'Password is a required field.');
+      return false;
+    }
+  
+    if (value.length < 8) {
+      showErrorMessage(passwordInput, 'The password needs to be at least 8 characters long.');
+      return false;
+    }
+  
+    showErrorMessage(passwordInput, null);
+    return true;
+  }
+  
+// Validates forms
+    function validateForm() {
+        let isValidEmail = validateEmail();
+        let isValidPassword = validatePassword();
+        return isValidEmail && isValidPassword;
+    }
+
+// Close the modal
+    function hideModal() {
+        let modalContainer = document.querySelector('#modal-container');
+        modalContainer.classList.remove('is-visible');
+    }
+
+// Allows for the close button to work to exit file.
+    let closeButtonElement = document.createElement('button');
+        closeButtonElement.classList.add('modal-close');
+        closeButtonElement.innerText = 'Close';
+        closeButtonElement.addEventListener('click', hideModal);
+
+// Allows for the esc button to work to exit file.
+    window.addEventListener('keydown', (e) => {
+        let modalContainer = document.querySelector('#modal-container');
+        if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+        hideModal();  
+        }
+    });
+
+// Allows for clicking outside the modal to exit the file.
+    modalContainer.addEventListener('click', (e) => {
+/* Since this is also triggered when clicking INSIDE the modal,
+we only want to close if the user clicks directly on the overlay.*/
+        let target = e.target;
+        if (target === modalContainer) {
+        hideModal();
+        }
+    });
+
+// Action once you click confirm or cancel
+document.querySelector('#show-dialog').addEventListener('click', () => {
+    showDialog('Confirm action', 'Are you sure you want to do this?').then(function() {
+      alert('confirmed!');
+    }, () => {
+      alert('not confirmed');
+    });
+  });  
+
+// Confirming action
+document.querySelector('#show-dialog').addEventListener('click', () => {
+    showDialog('Confirm action', 'Are you sure you want to do this?');
+  });
+
+// The showDialog function is going to accept a title and text as parameters, and the title and text will be used to engage in a dialog with the user, by asking the user to confirm an action. You will then provide the user with options (buttons) to confirm or cancel.
+function showDialog(title, text) {
+  showModal(title, text);
+
+  // We have defined modalContainer here
+  let modalContainer = document.querySelector('#modal-container');
+
+  // We want to add a confirm and cancel button to the modal
+  let modal = modalContainer.querySelector('.modal');
+
+  let confirmButton = document.createElement('button');
+  confirmButton.classList.add('modal-confirm');
+  confirmButton.innerText = 'Confirm';
+
+  let cancelButton = document.createElement('button');
+  cancelButton.classList.add('modal-cancel');
+  cancelButton.innerText = 'Cancel';
+
+  modal.appendChild(confirmButton);
+  modal.appendChild(cancelButton);
+
+  // We want to focus the confirmButton so that the user can simply press Enter
+  confirmButton.focus();
+}
+
+// showDialog now returns a promise
+function showDialog(title, text) {
+    // [...] Your existing code
+  
+    // Return a promise that resolves when confirmed, else rejects
+    return new Promise((resolve, reject) => {
+      cancelButton.addEventListener('click', () => {
+        hideModal();
+        reject();
+      });
+      confirmButton.addEventListener('click', () => {
+        hideModal();
+        resolve();
+      })
+    });
+  }
+
+// Dialog always rejects if closed
+    let dialogPromiseReject; // This can be set later, by showDialog
+
+    function hideModal() {
+    let modalContainer = document.querySelector('#modal-container');
+    modalContainer.classList.remove('is-visible');
+
+    if (dialogPromiseReject) {
+        dialogPromiseReject();
+        dialogPromiseReject = null;
+    }
+    }
+
+    let container = document.querySelector('#image-container');
+
+    letmyImage = document.createElement('img');
+
+    MediaKeyMessageEvent.src='https://unsplash.com/photos/l1SEP7nf2XU';
+
+    container.appendChild(myImage);
+  
