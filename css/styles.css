@@ -24,6 +24,23 @@
   text-align: center;
 }
 
+.modal {
+  background-color: white;
+  color: #333;
+  max-width: 800px;
+  margin: auto;
+  box-shadow: rgba(0,0,0,0.2) 0px 50px 150px;
+}
+
+.modal-close {
+  background-color: #ff4136;
+  color: white;
+  border-radius: 50%;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+}
+
 .error-message {
   color: red;
   font-size: 0.8em;
