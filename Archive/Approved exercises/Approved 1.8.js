@@ -1,7 +1,7 @@
 let pokemonRepository = (function() {
     let pokemonList =[];
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
-
+  
     function add(pokemon) {
         if (
             typeof pokemon === "object" && "name" in pokemon
@@ -11,14 +11,14 @@ let pokemonRepository = (function() {
             console.log("pokemon is not correct");
         }
     }
-// Define a function named getAll that returns the pokemonList array.
+  // Define a function named getAll that returns the pokemonList array.
     function getAll() {
         return pokemonList;
     }
-/* Defines a function that creates a list item with a button for a given pokemon & appends it
+  /* Defines a function that creates a list item with a button for a given pokemon & appends it
   to a list of pokemons in the DOM. The button event listener logs the event to the console & calls
   the showDetails function for the pokemon when clicked.*/
-
+  
   function addListItem(pokemon){
     let pokemonList = document.querySelector(".pokemon-list");
     let listPokemon = document.createElement("li");
@@ -26,18 +26,18 @@ let pokemonRepository = (function() {
     button.innerText = pokemon.name;
     button.classList.add("button-class");
     listPokemon.appendChild(button);
-// Lines 30-32, adds the line item "listPokemon" to the container which is pokemonList defined in line 23
+  // Lines 30-32, adds the line item "listPokemon" to the container which is pokemonList defined in line 23
     if (pokemonList) {
         pokemonList.appendChild(listPokemon);
     }
     button.addEventListener("click", function(event) {
         showDetails(pokemon);
     });
-}
-/* loadList fetches data from an API, processes the JSON response to create pokemon objects
-with name & details URL properties & adds them to the pokemon list using the add function.
-If there's an error during fetch, it is caught & logged to the console.*/
-function loadList() {
+  }
+  /* loadList fetches data from an API, processes the JSON response to create pokemon objects
+  with name & details URL properties & adds them to the pokemon list using the add function.
+  If there's an error during fetch, it is caught & logged to the console.*/
+  function loadList() {
     return fetch(apiUrl).then(function (response) {
       return response.json();
     }).then(function (json) {
@@ -51,11 +51,11 @@ function loadList() {
     }).catch(function (e) {
       console.error(e);
     })
-}
-/* same as previous function + processes the JSON response to add image URL, height, & types properties
-to the item & returns a promise.*/
-
-function loadDetails(item) {
+  }
+  /* same as previous function + processes the JSON response to add image URL, height, & types properties
+  to the item & returns a promise.*/
+  
+  function loadDetails(item) {
     let url = item.detailsUrl;
     return fetch(url).then(function (response) {
         return response.json();
@@ -67,17 +67,17 @@ function loadDetails(item) {
     }).catch(function (e) {
         console.error(e);
     });
-}
-function showDetails(pokemon) {
+  }
+  function showDetails(pokemon) {
     loadDetails(pokemon).then(function () {
     showModal(pokemon.name, pokemon.height, pokemon.imageUrl)
       console.log(pokemon);
     });
-}
-
-let modalContainer = document.querySelector('#modal-container');
+  }
+  
+  let modalContainer = document.querySelector('#modal-container');
     
-function showModal (title, height, imageUrl) {
+  function showModal (title, height, imageUrl) {
     modalContainer.innerHTML = '';
     let modal = document.createElement('div');
     modal.classList.add('modal');
@@ -98,31 +98,38 @@ function showModal (title, height, imageUrl) {
     modalContainer.appendChild(modal);
     modalContainer.classList.add('is-visible');
     }
-let dialogPromiseReject;
-
-function hideModal() {
+  let dialogPromiseReject;
+  
+  function hideModal() {
     let modalContainer = document.querySelector ('#modal-container');
     modalContainer.classList.remove('is-visible');
     if (dialogPromiseReject) {
     dialogPromiseReject ();
     dialogPromiseReject = null;
     }
-}
-
-modalContainer.addEventListener('click', (e) => {
+  }
+  
+  modalContainer.addEventListener('click', (e) => {
     // since this is also triggered when clicking INSIDE the modal
     // We only want to close if the user clicks directly on the overlay
     let target = e.target;
     if (target === modalContainer) {
         hideModal();
     }
-    });
+  });
     // document.querySelector('#show-modal').addEventListener('click', () => {
     // showModal ('Modal title', 'This is the modal content');
     // });
-
-// Return an object with its corresponding properties.
-return {
+  
+  window.addEventListener('keydown', (e) => {
+    let modalContainer = document.querySelector('#modal-container');
+    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+      hideModal();  
+    }
+  });
+  
+  // Return an object with its corresponding properties.
+  return {
     getAll: getAll,
     add: add,
     addListItem: addListItem,
@@ -130,12 +137,12 @@ return {
     loadDetails: loadDetails,
     showDetails: showDetails,
     showModal: showModal
-};
-})();
-
-// This calls the api, runs pokemon repo & the load list
-pokemonRepository.loadList().then(function() {
+  };
+  })();
+  
+  // This calls the api, runs pokemon repo & the load list
+  pokemonRepository.loadList().then(function() {
     pokemonRepository.getAll().forEach(function(pokemon) {
         pokemonRepository.addListItem(pokemon);
         });
-});
+  });
