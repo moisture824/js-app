@@ -22,9 +22,13 @@ the showDetails function for the pokemon when clicked.*/
 function addListItem(pokemon){
   let pokemonList = document.querySelector(".pokemon-list");
   let listPokemon = document.createElement("li");
+  listPokemon.classList.add("list-group-item");
   let button = document.createElement("button");
   button.innerText = pokemon.name;
-  button.classList.add("button-class");
+  button.classList.add("btn");
+  button.classList.add("btn-primary");
+  button.setAttribute('data-toggle', 'modal');
+      button.setAttribute('data-target', '#exampleModal');
   listPokemon.appendChild(button);
 // Lines 30-32, adds the line item "listPokemon" to the container which is pokemonList defined in line 23
   if (pokemonList) {
@@ -75,58 +79,21 @@ function showDetails(pokemon) {
   });
 }
 
-let modalContainer = document.querySelector('#modal-container');
-  
 function showModal (title, height, imageUrl) {
-  modalContainer.innerHTML = '';
-  let modal = document.createElement('div');
-  modal.classList.add('modal');
-  let closeButtonElement = document.createElement('button');
-  closeButtonElement.classList.add('modal-close');
-  closeButtonElement.innerText = 'Close';
-  closeButtonElement.addEventListener('click', hideModal);
-  let titleElement = document.createElement ('h1');
+  let titleElement = document.querySelector('.modal-title');
   titleElement.innerText = title;
-  let contentElement = document.createElement ('p');
-  contentElement.innerText = height;
-  let myImage = document.createElement('img');
-  myImage.src = imageUrl;
-  modal.appendChild(myImage);
-  modal.appendChild(closeButtonElement);
-  modal.appendChild(titleElement);
-  modal.appendChild(contentElement);
-  modalContainer.appendChild(modal);
-  modalContainer.classList.add('is-visible');
+  let imageElement = document.querySelector('.image-holder'); //selects the image holder class that was created in the html
+  let myImage = document.createElement('img'); //creates the image itself
+  myImage.src = imageUrl; // add the image to the selector from line 83
+  imageElement.innerHTML="";
+  imageElement.appendChild(myImage); // add the image to the selector from line 83
+  let heightElement = document.querySelector('.height-holder');
+  heightElement.innerText = height;
   }
-let dialogPromiseReject;
 
-function hideModal() {
-  let modalContainer = document.querySelector ('#modal-container');
-  modalContainer.classList.remove('is-visible');
-  if (dialogPromiseReject) {
-  dialogPromiseReject ();
-  dialogPromiseReject = null;
-  }
-}
-
-modalContainer.addEventListener('click', (e) => {
-  // since this is also triggered when clicking INSIDE the modal
-  // We only want to close if the user clicks directly on the overlay
-  let target = e.target;
-  if (target === modalContainer) {
-      hideModal();
-  }
-});
   // document.querySelector('#show-modal').addEventListener('click', () => {
   // showModal ('Modal title', 'This is the modal content');
   // });
-
-window.addEventListener('keydown', (e) => {
-  let modalContainer = document.querySelector('#modal-container');
-  if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
-    hideModal();  
-  }
-});
 
 // Return an object with its corresponding properties.
 return {
