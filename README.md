@@ -1,3 +1,13 @@
 Sample Pokemon Application
 
-Description: This application provides a basic structure of a bootstrap code such that each pokemon within the list is auto-formatted with a blue color. There are 150 pokemon in total which comes from an API that autogenerates the images within each modal.
+Objective: To build a small web application with HTML, CSS, and JavaScript that loads
+data from an external API and enables the viewing of data points in detail.
+
+Content Learned:
+
+- Implementing Javascript
+- Loaded data from an API
+- How to add UI elements with Javascript
+- Introduction to jQuery
+- Utilized Bootstrap for streamling css styling
+- Debugging code using ESL linting & chrome web dev functions
