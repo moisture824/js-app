@@ -51,3 +51,23 @@ li {
     color: red;
     font-size: 0.8em;
   }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+  }
+
+  .pokemon-list {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+  }
+
+  .btn-primary {
+    background-color: #194686;
+  }
+
+  .pokemon-list button {
+    background-color: #194686;
+  }
