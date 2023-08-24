@@ -71,3 +71,9 @@ li {
   .pokemon-list button {
     background-color: #194686;
   }
+
+  .navbar-light {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
