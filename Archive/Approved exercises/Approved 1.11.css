@@ -1,0 +1,66 @@
+.modal-body {
+    text-align: center;
+    background-color: aliceblue;
+  }
+    
+  li {
+      list-style-type: none;
+      line-height: 50px;
+      text-align: center;
+  }
+    
+  .error-message {
+    color: red;
+    font-size: 0.8em;
+  }
+  
+  .grid-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  }
+  
+  .pokemon-list {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  background-color: #194686;
+  }
+  
+  .pokemon-logo {
+    padding: 5px;
+    height: 80px;
+    width: 150px;
+  }
+  
+  .pokemon-list button {
+    background-color: #194686;
+    text-transform: capitalize;
+  }
+  
+  .navbar-light {
+    display: flex;
+    justify-content: center;
+  }
+  
+  #exampleModalLabel {
+    text-transform: capitalize;
+  }
+  
+  .modal-header {
+    display: flex;
+    margin-left: 30px;
+  }
+  
+  .modal-title {
+    flex-grow: 1;
+    text-align: center;
+  }
+  
+  .my-TypeNames {
+    text-transform: capitalize;
+  }
+  
+  .height-holder {
+    margin-right: 30px;
+  }
