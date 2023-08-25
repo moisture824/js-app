@@ -74,12 +74,13 @@ function loadDetails(item) {
 }
 function showDetails(pokemon) {
   loadDetails(pokemon).then(function () {
-  showModal(pokemon.name, pokemon.height, pokemon.imageUrl)
-    console.log(pokemon);
+    const typeNames = pokemon.types.map((type) => type.type.name);
+    console.log(pokemon.types, typeNames);
+  showModal(pokemon.name, pokemon.height, pokemon.imageUrl, typeNames);
   });
 }
 
-function showModal (title, height, imageUrl) {
+function showModal (title, height, imageUrl, typeNames) {
   let titleElement = document.querySelector('.modal-title');
   titleElement.innerText = title;
   let imageElement = document.querySelector('.image-holder'); //selects the image holder class that was created in the html
@@ -88,7 +89,7 @@ function showModal (title, height, imageUrl) {
   imageElement.innerHTML="";
   imageElement.appendChild(myImage); // add the image to the selector from line 83
   let heightElement = document.querySelector('.height-holder');
-  heightElement.innerText = height;
+  heightElement.innerHTML = "<ul><li>Height: " + height + "</li><li class='my-TypeNames'>Types: " + typeNames.join(", ") + "</li></u1>";
   }
 
   // document.querySelector('#show-modal').addEventListener('click', () => {
